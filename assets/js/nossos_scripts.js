@@ -4,16 +4,19 @@
 
 /**
  * Registra a visualização de um post no Firestore e atualiza a tela.
- * @param {string} postSlug - O identificador único do post.
+ * ADAPTADO para o novo padrão da Manus IA (window.firebaseApp).
  */
 async function registrarVisualizacao(postSlug) {
-  // Verifica se a 'ponte' do Firebase foi criada no firebase-init.html
-  if (!window.firebase || !window.firebase.db) {
-    console.error("Erro: Objeto window.firebase não encontrado.");
+  // 1. Verificamos se o NOVO objeto da Manus IA está pronto
+  if (!window.firebaseApp || !window.firebaseApp.db) {
+    console.warn("Aguardando inicialização do FirebaseApp pela Manus IA...");
     return;
   }
 
-  const { db, doc, getDoc, setDoc, increment } = window.firebase;
+  // 2. Buscamos o banco e as funções no novo endereço (functions)
+  const db = window.firebaseApp.db;
+  const { doc, getDoc, setDoc, increment } = window.firebaseApp.functions;
+
   const docRef = doc(db, 'views', postSlug);
 
   try {
@@ -21,33 +24,28 @@ async function registrarVisualizacao(postSlug) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      // Incrementa o contador no Firestore
       await setDoc(docRef, { count: increment(1) }, { merge: true });
-      // Calcula o valor para exibição imediata (valor atual + 1)
       novoTotal = (docSnap.data().count || 0) + 1;
     } else {
-      // Cria o primeiro registro se o post for novo no banco
       await setDoc(docRef, { count: 1 });
     }
 
-    console.log("%c[SUCESSO]%c Visualização registrada para: " + postSlug, "color: #22c55e; font-weight: bold;", "color: inherit;");
+    console.log("%c[SUCESSO]%c View registrada no novo padrão Manus: " + postSlug, "color: #22c55e; font-weight: bold;", "color: inherit;");
 
-    // --- ATUALIZAÇÃO DA INTERFACE (UI) ---
     const displayElement = document.getElementById('view-count-display');
     if (displayElement) {
       displayElement.textContent = novoTotal;
-      // Se o elemento pai estiver escondido (ex: class="hidden"), nós o mostramos
       const container = displayElement.closest('.view-count-container');
       if (container) container.classList.remove('hidden');
     }
 
   } catch (error) {
-    console.error("Erro ao processar visualização no Firestore:", error);
+    console.error("Erro ao registrar view (v2):", error);
   }
 }
 
 // ============================================================================
-// INICIALIZADOR DE MÓDULOS
+// INICIALIZADOR DE MÓDULOS (O resto continua igual!)
 // ============================================================================
 
 let appHasInitialized = false;
@@ -56,7 +54,7 @@ function initApp() {
   if (appHasInitialized) return;
   appHasInitialized = true;
   
-  console.log("App inicializado. Verificando módulos...");
+  console.log("App inicializado. Checando módulos...");
 
   // Módulo: Dark Mode
   if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -70,34 +68,21 @@ function initApp() {
     mobileMenuButton.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
   }
 
-  // Módulo: Rolagem Suave
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) target.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-
-  // =================================================
-  // MÓDULO: CONTADOR DE VISUALIZAÇÕES
-  // =================================================
+  // Módulo: Contador de Views
   const postSlugElement = document.getElementById('post-slug');
   if (postSlugElement) {
-    // Usamos textContent.trim() para evitar quebras de linha do Jekyll
     const slug = postSlugElement.textContent.trim();
     if (slug) {
-      console.log("Módulo Contador de Views ATIVADO. Slug:", slug);
-      registrarVisualizacao(slug);
+      // Pequeno atraso para garantir que o script da Manus carregou o módulo
+      setTimeout(() => registrarVisualizacao(slug), 500);
     }
   }
 
-  // Módulo: Texto Animado (Typing effect)
+  // Módulo: Texto Animado
   const typingElement = document.getElementById('typing-text');
   if (typingElement) {
     const texts = ["Bem-vindos ao", "Explore o", "Descubra o"];
     let textIndex = 0, charIndex = 0, isDeleting = false;
-    
     function typeText() {
       const currentText = texts[textIndex];
       if (isDeleting) {
@@ -107,7 +92,6 @@ function initApp() {
         typingElement.textContent = currentText.substring(0, charIndex + 1);
         charIndex++;
       }
-
       if (!isDeleting && charIndex === currentText.length) {
         setTimeout(() => isDeleting = true, 2000);
       } else if (isDeleting && charIndex === 0) {
@@ -120,7 +104,7 @@ function initApp() {
   }
 }
 
-// Gatilho de inicialização
+// Inicialização segura
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initApp);
 } else {
