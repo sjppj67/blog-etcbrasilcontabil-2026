@@ -134,3 +134,76 @@ ARQUIVO FONTE PRINCIPAL - MASTER.CSS (VERSÃO 10.0 - NEON SUTIL)
   @keyframes pulseGlow { 0% { box-shadow: 0 0 8px rgba(0, 240, 255, 0.2); } 100% { box-shadow: 0 0 20px rgba(112, 8, 219, 0.5); } }
   .pulse-glow { animation: pulseGlow 2s ease-in-out infinite alternate; }
 }
+/* ================================================================== */
+/* ESTILOS ESPECÍFICOS PARA A PÁGINA DE POST (post.html )              */
+/* ================================================================== */
+
+.post-shell { 
+  background: #ffffff; 
+  color: #334155; 
+}
+.post-title { 
+  color: #0f172a; 
+}
+.post-meta, .post-meta * { 
+  color: #64748b; 
+}
+.post-body { 
+  color: #475569; 
+}
+.post-body h2, .post-body h3, .post-body h4 {
+  color: #0f172a;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+}
+.post-body h2 { font-size: 2.2rem; }
+.post-body h3 { font-size: 1.7rem; }
+.post-body h4 { font-size: 1.35rem; }
+.post-body p { 
+  color: #475569; 
+  font-size: 1.12rem; 
+  line-height: 1.95; 
+  margin-bottom: 1.3rem; 
+}
+.post-body li { 
+  color: #475569; 
+  font-size: 1.08rem; 
+  line-height: 1.85; 
+  margin-bottom: 0.55rem; 
+}
+.post-body strong { 
+  color: #0f172a; 
+  font-weight: 700; 
+}
+.post-body a { 
+  color: #0369a1; 
+  text-decoration: none; 
+}
+.post-body a:hover { 
+  text-decoration: underline; 
+}
+.post-body blockquote { 
+  border-left: 4px solid #cbd5e1; 
+  padding-left: 1rem; 
+  color: #64748b; 
+  font-style: italic; 
+  margin: 1.8rem 0; 
+}
+.post-body img { 
+  border-radius: 1rem; 
+  margin: 2rem 0; 
+}
+.post-body hr { 
+  border: 0; 
+  border-top: 1px solid #e2e8f0; 
+  margin: 2rem 0; 
+}
+.post-body table { 
+  width: 100%; 
+  display: block; 
+  overflow-x: auto; 
+  margin: 2rem 0; 
+}

@@ -1,36 +1,33 @@
-<!-- Início da Configuração do Firebase (VERSÃO CORRIGIDA) -->
+<!-- _includes/firebase-init.html -->
 <script type="module">
-  // Importa as funções que vamos precisar dos SDKs do Firebase
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-  import { getStorage } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-       // Sua configuração do Firebase para o projeto VIP (CORRETA)
-      const firebaseConfig = {
-    apiKey: "AIzaSyCchpK_pc1G2hENpQjJVHdrW9kVdzrZZq8",
-    authDomain: "blog-etc-brasil-contabilidade.firebaseapp.com",
-    projectId: "blog-etc-brasil-contabilidade",
-    storageBucket: "blog-etc-brasil-contabilidade.firebasestorage.app",
-    messagingSenderId: "956549512635",
-    appId: "1:956549512635:web:4d9ebc3bf646a9960bd89e"
-};
+  // ==================================================================
+  // A CONFIGURAÇÃO DO FIREBASE SERÁ INJETADA AQUI PELO NETLIFY
+  // ==================================================================
+  const firebaseConfig = {
+    apiKey: "{{- settings.env.JEKYLL_FIREBASE_API_KEY -}}",
+    authDomain: "{{- settings.env.JEKYLL_FIREBASE_AUTH_DOMAIN -}}",
+    projectId: "{{- settings.env.JEKYLL_FIREBASE_PROJECT_ID -}}",
+    storageBucket: "{{- settings.env.JEKYLL_FIREBASE_STORAGE_BUCKET -}}",
+    messagingSenderId: "{{- settings.env.JEKYLL_FIREBASE_MESSAGING_SENDER_ID -}}",
+    appId: "{{- settings.env.JEKYLL_FIREBASE_APP_ID -}}",
+    measurementId: "{{- settings.env.JEKYLL_FIREBASE_MEASUREMENT_ID -}}"
+  };
+  // ==================================================================
 
-
-  // Inicializa o Firebase
+  // Initialize Firebase
   const app = initializeApp(firebaseConfig );
+  const db = getFirestore(app);
 
-  // Disponibiliza os serviços e funções do Firebase globalmente
-  window.firebaseApp = {
-    auth: getAuth(app),
-    db: getFirestore(app),
-    storage: getStorage(app),
-    functions: {
-      onAuthStateChanged,
-      signOut,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword
-    }
+  // Disponibiliza as funções globalmente para o nossos_scripts.js
+  window.firebase = {
+    db,
+    doc,
+    getDoc,
+    setDoc,
+    increment
   };
 </script>
-<!-- Fim da Configuração do Firebase -->
