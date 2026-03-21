@@ -5,21 +5,21 @@
   import { getFirestore, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   // ==================================================================
-  // A CONFIGURAÇÃO DO FIREBASE SERÁ INJETADA AQUI PELO NETLIFY
+  // A CONFIGURAÇÃO DO FIREBASE SERÁ INJETADA PELO PLUGIN Ruby DURANTE O BUILD NO NETLIFY
   // ==================================================================
   const firebaseConfig = {
-    apiKey: "{{- settings.env.JEKYLL_FIREBASE_API_KEY -}}",
-    authDomain: "{{- settings.env.JEKYLL_FIREBASE_AUTH_DOMAIN -}}",
-    projectId: "{{- settings.env.JEKYLL_FIREBASE_PROJECT_ID -}}",
-    storageBucket: "{{- settings.env.JEKYLL_FIREBASE_STORAGE_BUCKET -}}",
-    messagingSenderId: "{{- settings.env.JEKYLL_FIREBASE_MESSAGING_SENDER_ID -}}",
-    appId: "{{- settings.env.JEKYLL_FIREBASE_APP_ID -}}",
-    measurementId: "{{- settings.env.JEKYLL_FIREBASE_MEASUREMENT_ID -}}"
+    apiKey: "{{ site.env.api_key }}",
+    authDomain: "{{ site.env.auth_domain }}",
+    projectId: "{{ site.env.project_id }}",
+    storageBucket: "{{ site.env.storage_bucket }}",
+    messagingSenderId: "{{ site.env.messaging_sender_id }}",
+    appId: "{{ site.env.app_id }}",
+    measurementId: "{{ site.env.measurement_id }}"
   };
   // ==================================================================
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig );
+  const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
   // Disponibiliza as funções globalmente para o nossos_scripts.js
@@ -31,3 +31,4 @@
     increment
   };
 </script>
+
