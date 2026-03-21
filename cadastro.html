@@ -63,39 +63,39 @@ permalink: /cadastro/
   </div>
 </div>
 
-<!-- SUBSTITUA O SCRIPT ANTIGO POR ESTE -->
+<!-- Script Simplificado para /cadastro.html -->
 <script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('cadastroForm', () => ({
-      email: '',
-      password: '',
-      errorMessage: '',
-      loading: false,
-      
-      handleCadastro() {
-        this.loading = true;
-        this.errorMessage = '';
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('cadastroForm', () => ({
+            email: '',
+            password: '',
+            errorMessage: '',
+            loading: false,
+            handleCadastro() {
+                this.loading = true;
+                this.errorMessage = '';
+                
+                // Confia no Ponto Único de Controle (firebase-init.html)
+                const { auth, functions } = window.firebaseApp;
 
-        const { auth, functions } = window.firebaseApp;
-        functions.createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then((userCredential) => {
-            console.log('Cadastro com sucesso!', userCredential.user);
-            window.location.href = '/dashboard/';
-          })
-          .catch((error) => {
-            console.error('Erro no cadastro:', error.code);
-            if (error.code === 'auth/email-already-in-use') {
-              this.errorMessage = 'Este e-mail já está cadastrado. Tente fazer o login.';
-            } else if (error.code === 'auth/weak-password') {
-              this.errorMessage = 'Sua senha é muito fraca. Use pelo menos 6 caracteres.';
-            } else {
-              this.errorMessage = 'Ocorreu um erro. Por favor, tente mais tarde.';
+                functions.createUserWithEmailAndPassword(auth, this.email, this.password)
+                    .then(userCredential => {
+                        console.log('P1: Cadastro com sucesso!', userCredential.user.email);
+                        window.location.href = '/dashboard/';
+                    })
+                    .catch(error => {
+                        console.error('P1: Erro no cadastro:', error.code);
+                        if (error.code === 'auth/email-already-in-use') {
+                            this.errorMessage = 'Este e-mail já está em uso. Tente fazer login.';
+                        } else if (error.code === 'auth/weak-password') {
+                            this.errorMessage = 'A senha é muito fraca. Use pelo menos 6 caracteres.';
+                        }
+                        else {
+                            this.errorMessage = 'Ocorreu um erro. Verifique os dados e tente novamente.';
+                        }
+                    })
+                    .finally(() => { this.loading = false; });
             }
-          })
-          .finally(() => {
-            this.loading = false;
-          });
-      }
-    }));
-  });
+        }));
+    });
 </script>

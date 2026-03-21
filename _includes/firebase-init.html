@@ -1,34 +1,53 @@
-<!-- _includes/firebase-init.html -->
+<!-- /_includes/firebase-init.html -->
+<!-- P1/MANUS IA: Ponto Único de Controle do Firebase (V2 - Unificado) -->
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    // PASSO 1: Importar TODAS as ferramentas que o projeto inteiro vai usar
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-  // ==================================================================
-  // A CONFIGURAÇÃO DO FIREBASE SERÁ INJETADA PELO PLUGIN Ruby DURANTE O BUILD NO NETLIFY
-  // ==================================================================
-  const firebaseConfig = {
-    apiKey: "{{ site.env.api_key }}",
-    authDomain: "{{ site.env.auth_domain }}",
-    projectId: "{{ site.env.project_id }}",
-    storageBucket: "{{ site.env.storage_bucket }}",
-    messagingSenderId: "{{ site.env.messaging_sender_id }}",
-    appId: "{{ site.env.app_id }}",
-    measurementId: "{{ site.env.measurement_id }}"
-  };
-  // ==================================================================
+    // PASSO 2: A CONFIGURAÇÃO DO FIREBASE SERÁ INJETADA PELO PLUGIN Ruby DURANTE O BUILD
+    // Mantendo a sua estrutura original e profissional!
+    const firebaseConfig = {
+      apiKey: "{{ site.env.api_key }}",
+      authDomain: "{{ site.env.auth_domain }}",
+      projectId: "{{ site.env.project_id }}",
+      storageBucket: "{{ site.env.storage_bucket }}",
+      messagingSenderId: "{{ site.env.messaging_sender_id }}",
+      appId: "{{ site.env.app_id }}",
+      measurementId: "{{ site.env.measurement_id }}"
+    };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    // PASSO 3: Inicializar o Firebase
+    const app = initializeApp(firebaseConfig );
 
-  // Disponibiliza as funções globalmente para o nossos_scripts.js
-  window.firebase = {
-    db,
-    doc,
-    getDoc,
-    setDoc,
-    increment
-  };
+    // PASSO 4: Disponibilizar TODAS as ferramentas globalmente para outros scripts
+    // Isso permite que login.html, cadastro.html, etc., usem as mesmas ferramentas
+    window.firebaseApp = {
+        // Serviços
+        auth: getAuth(app),
+        db: getFirestore(app),
+        storage: getStorage(app),
+        // Funções (para facilitar o uso)
+        functions: {
+            // Auth
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+            signOut,
+            // Firestore
+            doc,
+            getDoc,
+            setDoc,
+            increment,
+            // Storage
+            ref,
+            uploadBytes,
+            getDownloadURL
+        }
+    };
+    console.log("P1: Firebase inicializado pelo Ponto Único de Controle (V2 - Unificado).");
 </script>
+
 

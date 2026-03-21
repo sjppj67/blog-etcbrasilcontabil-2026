@@ -2,100 +2,27 @@
 layout: default
 ---
 <style>
-  .post-shell {
-    background: #ffffff;
-    color: #334155;
+  /* Seus estilos originais mantidos */
+  .post-shell { background: #ffffff; color: #334155; }
+  .post-title { color: #0f172a; }
+  .post-meta, .post-meta * { color: #64748b; }
+  .post-body { color: #475569; }
+  .post-body h2, .post-body h3, .post-body h4 {
+    color: #0f172a; font-family: "Playfair Display", serif; font-weight: 700;
+    line-height: 1.15; margin-top: 2.2rem; margin-bottom: 1rem;
   }
-
-  .post-title {
-    color: #0f172a;
-  }
-
-  .post-meta,
-  .post-meta * {
-    color: #64748b;
-  }
-
-  .post-body {
-    color: #475569;
-  }
-
-  .post-body h2,
-  .post-body h3,
-  .post-body h4 {
-    color: #0f172a;
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    line-height: 1.15;
-    margin-top: 2.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .post-body h2 {
-    font-size: 2.2rem;
-  }
-
-  .post-body h3 {
-    font-size: 1.7rem;
-  }
-
-  .post-body h4 {
-    font-size: 1.35rem;
-  }
-
-  .post-body p {
-    color: #475569;
-    font-size: 1.12rem;
-    line-height: 1.95;
-    margin-bottom: 1.3rem;
-  }
-
-  .post-body li {
-    color: #475569;
-    font-size: 1.08rem;
-    line-height: 1.85;
-    margin-bottom: 0.55rem;
-  }
-
-  .post-body strong {
-    color: #0f172a;
-    font-weight: 700;
-  }
-
-  .post-body a {
-    color: #0369a1;
-    text-decoration: none;
-  }
-
-  .post-body a:hover {
-    text-decoration: underline;
-  }
-
-  .post-body blockquote {
-    border-left: 4px solid #cbd5e1;
-    padding-left: 1rem;
-    color: #64748b;
-    font-style: italic;
-    margin: 1.8rem 0;
-  }
-
-  .post-body img {
-    border-radius: 1rem;
-    margin: 2rem 0;
-  }
-
-  .post-body hr {
-    border: 0;
-    border-top: 1px solid #e2e8f0;
-    margin: 2rem 0;
-  }
-
-  .post-body table {
-    width: 100%;
-    display: block;
-    overflow-x: auto;
-    margin: 2rem 0;
-  }
+  .post-body h2 { font-size: 2.2rem; }
+  .post-body h3 { font-size: 1.7rem; }
+  .post-body h4 { font-size: 1.35rem; }
+  .post-body p { color: #475569; font-size: 1.12rem; line-height: 1.95; margin-bottom: 1.3rem; }
+  .post-body li { color: #475569; font-size: 1.08rem; line-height: 1.85; margin-bottom: 0.55rem; }
+  .post-body strong { color: #0f172a; font-weight: 700; }
+  .post-body a { color: #0369a1; text-decoration: none; }
+  .post-body a:hover { text-decoration: underline; }
+  .post-body blockquote { border-left: 4px solid #cbd5e1; padding-left: 1rem; color: #64748b; font-style: italic; margin: 1.8rem 0; }
+  .post-body img { border-radius: 1rem; margin: 2rem 0; }
+  .post-body hr { border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+  .post-body table { width: 100%; display: block; overflow-x: auto; margin: 2rem 0; }
 </style>
 
 <div class="container mx-auto px-4 py-10 md:py-14">
@@ -103,6 +30,7 @@ layout: default
     <!-- Coluna principal -->
     <div class="lg:col-span-8">
       <article class="post-shell rounded-2xl shadow-2xl overflow-hidden">
+        <!-- O 'cabra' do slug que o JS usa para identificar o post -->
         <span id="post-slug" class="hidden">{{ page.slug | default: page.title | slugify }}</span>
 
         <!-- Cabeçalho -->
@@ -127,18 +55,28 @@ layout: default
               <div class="font-semibold" style="color:#334155;">
                 {% if page.author %}{{ page.author }}{% else %}Professor Sidney Jones{% endif %}
               </div>
-              {% assign author_bio = page.author_bio | default: site.author.bio %}
-              {% if author_bio %}
-              <div class="mt-1">{{ author_bio }}</div>
-              {% endif %}
-              <time datetime="{{ page.date | date_to_xmlschema }}" class="block mt-1">
-                {{ page.date | date: "%d de %B de %Y" }}
-              </time>
+              
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
+                <time datetime="{{ page.date | date_to_xmlschema }}">
+                  {{ page.date | date: "%d de %B de %Y" }}
+                </time>
+
+                <!-- NOVO: Container do Contador de Visualizações -->
+                <div class="view-count-container hidden flex items-center gap-1">
+                  <span class="text-slate-300">•</span>
+                  <svg xmlns="http://www.w3.org" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span id="view-count-display" class="font-medium">...</span>
+                  <span class="text-xs md:text-sm">leituras</span>
+                </div>
+              </div>
             </div>
           </div>
         </header>
 
-        <!-- Imagem destacada AUTOMATIZADA -->
+        <!-- Imagem destacada -->
         {% if page.image %}
         <figure class="px-6 md:px-10 pt-8">
           <div class="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
@@ -171,57 +109,47 @@ layout: default
       {% endif %}
     </div>
 
-    <!-- Sidebar -->
+    <!-- Sidebar (Busca, Categorias e CTA originais mantidos) -->
     <aside class="lg:col-span-4 mt-10 lg:mt-0">
-      <div class="sticky top-32 space-y-8">
-        <!-- Busca -->
-        <div class="bg-black p-6 rounded-xl border border-neon-blue/20">
-          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">Busca no Blog</h3>
-          <form action="/busca" method="get" class="flex items-center">
-            <input type="search" name="q" placeholder="O que você procura?"
-              class="bg-dark-950/70 border border-neon-blue/20 text-white text-sm rounded-l-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-neon-blue/50" />
-            <button type="submit"
-              class="bg-neon-blue text-dark-700 p-2.5 rounded-r-md hover:bg-opacity-80 transition-colors">
-              <svg xmlns="http://www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-          </form>
-        </div>
+       <!-- Conteúdo da sidebar igual ao seu original -->
+       <div class="sticky top-32 space-y-8">
+         <div class="bg-black p-6 rounded-xl border border-neon-blue/20">
+           <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">Busca no Blog</h3>
+           <form action="/busca" method="get" class="flex items-center">
+             <input type="search" name="q" placeholder="O que você procura?" class="bg-dark-950/70 border border-neon-blue/20 text-white text-sm rounded-l-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-neon-blue/50" />
+             <button type="submit" class="bg-neon-blue text-dark-700 p-2.5 rounded-r-md hover:bg-opacity-80 transition-colors">
+               <svg xmlns="http://www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+               </svg>
+             </button>
+           </form>
+         </div>
 
-        <!-- Categorias -->
-        <div class="bg-black p-6 rounded-xl border border-neon-blue/20">
-          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">Categorias</h3>
-          <ul class="space-y-2">
-            {% for category in site.categories %}
-            <li>
-              <a href="/blog/categorias/{{ category[0] | slugify }}/"
-                class="flex items-center justify-between w-full p-3 rounded-lg bg-gray-800/50 hover:bg-neon-blue/20 border border-gray-700 hover:border-neon-blue/50 transition-all duration-300 ease-in-out group">
-                <div class="flex items-center">
-                  <svg xmlns="http://www.w3.org"
-                    class="h-5 w-5 mr-3 text-gray-400 group-hover:text-neon-blue transition-colors" viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                  </svg>
-                  <span class="text-gray-200 group-hover:text-white transition-colors">{{ category[0] }}</span>
-                </div>
-                <span class="text-gray-400 font-semibold text-sm group-hover:text-neon-blue transition-colors">{{
-                  category[1].size }}</span>
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
+         <div class="bg-black p-6 rounded-xl border border-neon-blue/20">
+           <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">Categorias</h3>
+           <ul class="space-y-2">
+             {% for category in site.categories %}
+             <li>
+               <a href="/blog/categorias/{{ category[0] | slugify }}/" class="flex items-center justify-between w-full p-3 rounded-lg bg-gray-800/50 hover:bg-neon-blue/20 border border-gray-700 hover:border-neon-blue/50 transition-all duration-300 ease-in-out group">
+                 <div class="flex items-center">
+                   <svg xmlns="http://www.w3.org" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-neon-blue transition-colors" viewBox="0 0 20 20" fill="currentColor">
+                     <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                   </svg>
+                   <span class="text-gray-200 group-hover:text-white transition-colors">{{ category[0] }}</span>
+                 </div>
+                 <span class="text-gray-400 font-semibold text-sm group-hover:text-neon-blue transition-colors">{{ category[1].size }}</span>
+               </a>
+             </li>
+             {% endfor %}
+           </ul>
+         </div>
 
-        <!-- CTA -->
-        <div class="bg-black p-6 rounded-xl border border-neon-blue/20 text-center">
-          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-2">Escola de Negócios</h3>
-          <p class="text-gray-400 text-sm mb-4">Eleve sua gestão a um novo patamar. Conheça nossos cursos e mentorias.
-          </p>
-          <a href="#" class="btn-neon inline-block w-full py-2 px-4 rounded-lg text-center font-semibold">Saiba Mais</a>
-        </div>
-      </div>
+         <div class="bg-black p-6 rounded-xl border border-neon-blue/20 text-center">
+           <h3 class="font-playfair text-xl text-neon-blue text-glow mb-2">Escola de Negócios</h3>
+           <p class="text-gray-400 text-sm mb-4">Eleve sua gestão a um novo patamar.</p>
+           <a href="#" class="btn-neon inline-block w-full py-2 px-4 rounded-lg text-center font-semibold">Saiba Mais</a>
+         </div>
+       </div>
     </aside>
   </div>
 </div>

@@ -5,86 +5,118 @@ permalink: /login/
 ---
 
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-      Acessar sua conta
-    </h2>
-    <p class="mt-2 text-center text-sm text-gray-600">
-      Ou <a href="/cadastro/" class="font-medium text-indigo-600 hover:text-indigo-500">crie sua conta gratuitamente</a>
-    </p>
-  </div>
-
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md" x-data="loginForm()">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <form class="space-y-6" @submit.prevent="handleLogin">
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">
-            Endereço de e-mail
-          </label>
-          <div class="mt-1">
-            <input id="email" name="email" type="email" x-model="email" autocomplete="email" required
-                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-        </div>
-
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">
-            Senha
-          </label>
-          <div class="mt-1">
-            <input id="password" name="password" type="password" x-model="password" autocomplete="current-password" required
-                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-        </div>
-
-        <!-- Mensagem de Erro -->
-        <template x-if="errorMessage">
-          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline" x-text="errorMessage"></span>
-          </div>
-        </template>
-
-        <div>
-          <button type="submit"
-                  :disabled="loading"
-                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
-            <span x-show="!loading">Entrar</span>
-            <span x-show="loading">Aguarde...</span>
-          </button>
-        </div>
-      </form>
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Acessar sua conta
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            Ou <a href="/cadastro/" class="font-medium text-indigo-600 hover:text-indigo-500">crie sua conta gratuitamente</a>
+        </p>
     </div>
-  </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md" x-data="loginForm()">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form class="space-y-6" @submit.prevent="handleLogin">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">
+                        Endereço de e-mail
+                    </label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" x-model="email" autocomplete="email" required
+                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Senha
+                    </label>
+                    <div class="mt-1">
+                        <input id="password" name="password" type="password" x-model="password" autocomplete="current-password" required
+                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <!-- Mensagem de Erro -->
+                <template x-if="errorMessage">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline" x-text="errorMessage"></span>
+                    </div>
+                </template>
+
+                <div>
+                    <button type="submit"
+                            :disabled="loading"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
+                        <span x-show="!loading">Entrar</span>
+                        <span x-show="loading" style="display: none;">Aguarde...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
-<script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('loginForm', () => ({
-      email: '',
-      password: '',
-      errorMessage: '',
-      loading: false,
-      
-      handleLogin() {
-        this.loading = true;
-        this.errorMessage = '';
+<!-- ==================================================== -->
+<!-- SUPER CÉREBRO DE LOGIN - P1/MANUS IA                 -->
+<!-- ==================================================== -->
+<script type="module">
+    // PASSO 1: Importar as ferramentas do Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        const { auth, functions } = window.firebaseApp;
-        functions.signInWithEmailAndPassword(auth, this.email, this.password)
-          .then((userCredential) => {
-            console.log('Login com sucesso!', userCredential.user);
-            window.location.href = '/dashboard/';
-          })
-          .catch((error) => {
-            console.error('Erro no login:', error.code);
-            this.errorMessage = 'E-mail ou senha inválidos. Tente novamente.';
-          })
-          .finally(() => {
-            this.loading = false;
-          });
-      }
-    }));
-  });
+    // PASSO 2: Suas credenciais DEFINITIVAS do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJRfeQUZN_jXI5yDLeUk90D50bHZcs8yU",
+      authDomain: "blog-etcbrasilcontabil-2026.firebaseapp.com",
+      projectId: "blog-etcbrasilcontabil-2026",
+      storageBucket: "blog-etcbrasilcontabil-2026.firebasestorage.app",
+      messagingSenderId: "348329581266",
+      appId: "1:348329581266:web:74515353bbc2c2d6bfab0b",
+      measurementId: "G-JYZLP76CLJ"
+    };
+
+    // PASSO 3: Inicializar o Firebase e obter as ferramentas
+    const app = initializeApp(firebaseConfig );
+    const auth = getAuth(app);
+
+    // PASSO 4: Definir a lógica do Alpine.js
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('loginForm', () => ({
+            email: '',
+            password: '',
+            errorMessage: '',
+            loading: false,
+            
+            handleLogin() {
+                this.loading = true;
+                this.errorMessage = '';
+
+                signInWithEmailAndPassword(auth, this.email, this.password)
+                    .then((userCredential) => {
+                        console.log('P1: Login com sucesso!', userCredential.user.email);
+                        window.location.href = '/dashboard/';
+                    })
+                    .catch((error) => {
+                        console.error('P1: Erro no login:', error.code);
+                        // Mapeia códigos de erro para mensagens amigáveis
+                        switch (error.code) {
+                            case 'auth/invalid-email':
+                                this.errorMessage = 'O formato do e-mail é inválido.';
+                                break;
+                            case 'auth/user-not-found':
+                            case 'auth/wrong-password':
+                            case 'auth/invalid-credential':
+                                this.errorMessage = 'E-mail ou senha inválidos. Tente novamente.';
+                                break;
+                            default:
+                                this.errorMessage = 'Ocorreu um erro inesperado. Tente mais tarde.';
+                        }
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    });
+            }
+        }));
+    });
 </script>
-
-
