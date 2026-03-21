@@ -10,23 +10,21 @@
 <body class="bg-dark-950 text-gray-300 font-lato min-h-screen flex flex-col antialiased">
 
   {% include header.html %}
-  <main class="flex-grow">{{ content }}</main>
+  
+  <main class="flex-grow">
+    {{ content }}
+  </main>
+  
   {% include footer.html %}
 
-  <!-- =============================================== -->
-  <!-- ÁREA DE SCRIPTS (VERSÃO FINAL E CENTRALIZADA) -->
-  <!-- =============================================== -->
+  <!-- ================================================================== -->
+  <!-- ÁREA DE SCRIPTS (VERSÃO FINAL, CORRIGIDA E OTIMIZADA) -->
+  <!-- ================================================================== -->
 
-  <!-- 1. Scripts Essenciais de Includes (se houver) -->
+  <!-- 1. Scripts de Configuração e Inicialização -->
+  <!-- Inicializa o Firebase primeiro, pois outros scripts dependem dele. -->
   {% include firebase-init.html %}
 
-  <!-- 2. Bibliotecas Externas (Vendors) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXX"></script>
   <script>
@@ -36,8 +34,17 @@
     gtag('config', 'G-XXXXXX');
   </script>
 
-  <!-- 3. Seus Scripts Personalizados (SEMPRE POR ÚLTIMO) -->
-  <script src="/assets/js/nossos_scripts.js"></script>
-
+  <!-- 2. Bibliotecas Externas (Vendors) -->
+  <!-- O atributo 'defer' garante que eles não bloqueiem a renderização da página. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js" defer></script>
+  
+  <!-- 3. Seu Script Principal (Carregado por último ) -->
+  <!-- 'defer' garante que ele execute após o HTML ser analisado e na ordem correta. -->
+  <script src="/assets/js/nossos_scripts.js" defer></script>
+  
 </body>
 </html>
