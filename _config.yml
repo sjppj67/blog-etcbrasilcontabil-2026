@@ -1,0 +1,77 @@
+# _config.yml (VERSÃO CORRIGIDA)
+
+# 1. PLUGINS
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate-v2
+
+# 2. CONFIGURAÇÕES DO SITE
+title: ETC Brasil Contabilidade
+email: contato@etcbrasilcontabilidade.com.br
+description: >-
+  Blog especializado em contabilidade societária, IFRS e legislação tributária.
+baseurl: ""  
+url: "https://www.etcbrasilcontabil.com.br"
+twitter_username: etcbrasil
+github_username: etcbrasil
+
+# 3. CONFIGURAÇÕES DE BUILD
+markdown: kramdown
+permalink: pretty  # MUDEI PARA O PADRÃO RECOMENDADO
+
+# 4. CONFIGURAÇÕES DE PAGINAÇÃO (VERSÃO FUNCIONAL)
+# Configuração CORRIGIDA - EVITA DUPLICAÇÃO DE PASTAS
+pagination:
+  enabled: true
+  per_page: 6
+  permalink: '/page/:num/'  # ← Removido '/blog/' daqui
+  title: 'Blog - Página :num'
+  collection: 'posts'
+  sort_field: 'date'
+  sort_reverse: true
+  trail:
+    before: 1
+    after: 1
+
+collections:
+  posts:
+    output: true
+    permalink: '/blog/:path/'  # ← Mantido apenas aqui
+
+# 5. ARQUIVOS EXCLUÍDOS
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+  - package.json
+  - package-lock.json
+  - postcss.config.js
+  - README.md
+
+  # 6. ARQUIVOS INCLUÍDOS (ADICIONE ESTA SEÇÃO)
+include:
+  - assets/css/tailwind.css  # Força o Jekyll a copiar o CSS gerado
+  - assets/js/**/*.js        # Inclui todos os JS (se aplicável)
+
+  # 7. CONFIGURAÇÕES ESPECÍFICAS PARA TAILWIND (NOVO!)
+keep_files:
+  - assets/css/tailwind.css  # Impede o Jekyll de deletar o arquivo durante rebuilds
+
+# 8. CONFIGURAÇÃO DE METADADOS (MELHORIA)
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      css: /assets/css/tailwind.css  # Garante o caminho absoluto
+
+# 9. ATIVAÇÃO DO CACHE JEKYLL (SOLUÇÃO DEFINITIVA)
+jekyll_cache:
+  enabled: true  # Ativa o sistema de cache
+  cache_dir: ".jekyll-cache"  # Nome da pasta (padrão)
+
+# Bônus: Configuração extra para Windows
+webrick:
+  cache_control: {}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Ghost</title>
+  </head>
+  <body>
+    <!-- Formulário Fantasma para Detecção do Netlify -->
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-recaptcha="true"
+    >
+      <input type="text" name="nome" />
+      <input type="email" name="email" />
+      <select name="assunto">
+        <option>Dúvidas sobre o Blog</option>
+      </select>
+      <textarea name="mensagem"></textarea>
+      <div data-netlify-recaptcha="true"></div>
+    </form>
+  </body>
+</html>

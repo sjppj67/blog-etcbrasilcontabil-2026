@@ -1,0 +1,36 @@
+<!-- Início da Configuração do Firebase (VERSÃO CORRIGIDA) -->
+<script type="module">
+  // Importa as funções que vamos precisar dos SDKs do Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+  import { getStorage } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
+
+       // Sua configuração do Firebase para o projeto VIP (CORRETA)
+      const firebaseConfig = {
+    apiKey: "AIzaSyCchpK_pc1G2hENpQjJVHdrW9kVdzrZZq8",
+    authDomain: "blog-etc-brasil-contabilidade.firebaseapp.com",
+    projectId: "blog-etc-brasil-contabilidade",
+    storageBucket: "blog-etc-brasil-contabilidade.firebasestorage.app",
+    messagingSenderId: "956549512635",
+    appId: "1:956549512635:web:4d9ebc3bf646a9960bd89e"
+};
+
+
+  // Inicializa o Firebase
+  const app = initializeApp(firebaseConfig );
+
+  // Disponibiliza os serviços e funções do Firebase globalmente
+  window.firebaseApp = {
+    auth: getAuth(app),
+    db: getFirestore(app),
+    storage: getStorage(app),
+    functions: {
+      onAuthStateChanged,
+      signOut,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword
+    }
+  };
+</script>
+<!-- Fim da Configuração do Firebase -->

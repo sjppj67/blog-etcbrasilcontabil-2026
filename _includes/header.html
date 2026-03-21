@@ -1,0 +1,193 @@
+<header
+  x-data="{ openMegaMenu: false, mobileMenuOpen: false }"
+  class="bg-dark-900 text-gray-300 shadow-lg sticky top-0 z-50 border-b border-neon-blue/20"
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-dark-900 via-dark-800 to-dark-900 opacity-90"
+  ></div>
+
+  <div
+    class="container mx-auto px-6 h-32 flex justify-between items-center relative z-10 overflow-hidden"
+  >
+    <div class="flex items-center h-full">
+      <a href="{{ site.url }}" class="h-full flex items-center">
+        <img
+          src="{{ '/assets/img/logo-e-favicon-do-site/logo_blog_dark.svg' | relative_url }}"
+          alt="Logomarca da ETC Brasil Contabilidade"
+          class="h-40 w-auto object-contain"
+        />
+      </a>
+    </div>
+
+    <nav class="hidden md:flex items-center space-x-1">
+      {% for item in site.data.navigation %} {% if item.submenu %} {% if
+      item.name == "Blog" %}
+      <button
+        @click="openMegaMenu = !openMegaMenu"
+        class="font-lato font-medium px-4 py-2 rounded-md hover:bg-neon-blue/10 hover:text-neon-blue transition-colors duration-300 flex items-center group"
+        :class="{'text-neon-blue': openMegaMenu}"
+      >
+        Blog
+        <svg
+          class="ml-2 w-4 h-4 transition-transform"
+          :class="{'rotate-180': openMegaMenu}"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      {% else %}
+      <div
+        class="relative"
+        x-data="{ open: false }"
+        @mouseenter="open = true"
+        @mouseleave="open = false"
+      >
+        <button
+          class="flex items-center font-lato font-medium px-4 py-2 rounded-md hover:bg-neon-blue/10 hover:text-neon-blue transition-colors duration-300"
+        >
+          {{ item.name }}
+          <svg
+            class="ml-2 w-4 h-4 transition-transform"
+            :class="{'rotate-180': open}"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <ul
+          x-show="open"
+          x-transition:enter="transition ease-out duration-200"
+          x-transition:enter-start="opacity-0 scale-95"
+          x-transition:enter-end="opacity-100 scale-100"
+          x-transition:leave="transition ease-in duration-75"
+          x-transition:leave-start="opacity-100 scale-100"
+          x-transition:leave-end="opacity-0 scale-95"
+          class="absolute left-0 mt-2 w-48 bg-dark-800 rounded-md shadow-lg py-1 z-20"
+        >
+          {% for sub_item in item.submenu %}
+          <li>
+            <a
+              href="{{ sub_item.link | relative_url }}"
+              class="block px-4 py-2 text-sm text-gray-300 hover:bg-neon-blue/10 hover:text-neon-blue"
+              >{{ sub_item.name }}</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %} {% else %}
+      <a
+        href="{{ item.link | relative_url }}"
+        class="font-lato font-medium px-4 py-2 rounded-md hover:bg-neon-blue/10 hover:text-neon-blue transition-colors duration-300"
+        >{{ item.name }}</a
+      >
+      {% endif %} {% endfor %}
+    </nav>
+
+    <div class="md:hidden flex items-center">
+      <button
+        @click="mobileMenuOpen = !mobileMenuOpen"
+        class="text-gray-300 focus:outline-none focus:text-neon-blue"
+      >
+        <svg
+          class="h-8 w-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {% include mega-menu.html %}
+
+  <div
+    x-show="mobileMenuOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 -translate-y-2"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 -translate-y-2"
+    class="md:hidden bg-dark-800/95 absolute inset-x-0 top-full py-4 shadow-lg z-30"
+    style="display: none"
+  >
+    <ul class="flex flex-col space-y-2 px-4">
+      {% for item in site.data.navigation %} {% if item.submenu %}
+      <li x-data="{ subOpen: false }">
+        <button
+          @click="subOpen = !subOpen"
+          class="w-full text-left py-4 px-4 rounded-xl hover:bg-neon-blue/10 hover:text-neon-blue font-lato text-xl group flex justify-between items-center"
+        >
+          {{ item.name }}
+          <svg
+            class="w-5 h-5"
+            :class="{'rotate-180': subOpen, 'text-neon-blue': subOpen}"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <ul x-show="subOpen" class="pl-4 mt-2 space-y-1">
+          {% for sub_item in item.submenu %}
+          <li>
+            <a
+              href="{{ sub_item.link | relative_url }}"
+              class="block font-lato text-sm py-2 px-3 rounded-md hover:bg-blue-400/10 hover:text-blue-300"
+            >
+              <span class="flex items-center">
+                <span class="w-2 h-2 bg-neon-blue rounded-full mr-2"></span>
+                {{ sub_item.name }}
+              </span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% else %}
+      <li>
+        <a
+          href="{{ item.link | relative_url }}"
+          class="block py-4 px-4 rounded-xl hover:bg-neon-blue/10 hover:text-neon-blue font-lato text-xl group"
+        >
+          <span class="flex items-center">
+            <span
+              class="w-2 h-2 bg-neon-blue rounded-full mr-4 opacity-0 group-hover:opacity-100"
+            ></span>
+            <span
+              class="group-hover:translate-x-2 transition-transform duration-200"
+              >{{ item.name }}</span
+            >
+          </span>
+        </a>
+      </li>
+      {% endif %} {% endfor %}
+    </ul>
+  </div>
+</header>

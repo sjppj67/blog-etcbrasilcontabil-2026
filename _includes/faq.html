@@ -1,0 +1,158 @@
+<!-- Início da Seção de Perguntas Frequentes (FAQ) - VERSÃO NEON -->
+<section class="py-16 bg-dark-900 relative">
+  <div class="sparkle-effect"></div>
+  <div class="container mx-auto px-4 relative z-10">
+    
+    <!-- Título da Seção -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold font-playfair text-glow-violet">
+        Perguntas Frequentes
+      </h2>
+      <p class="mt-3 text-lg text-gray-400 max-w-3xl mx-auto">
+        Respostas para as dúvidas mais comuns sobre nossa Área VIP, Blog e a futura Escola de Negócios.
+      </p>
+    </div>
+
+    <!-- Container do Acordeão -->
+    <div x-data="{ activeAccordion: '' }" class="max-w-3xl mx-auto space-y-4">
+      
+      <!-- Pergunta 1: O que é a Área VIP? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq1' }">
+        <button @click="activeAccordion = activeAccordion === 'faq1' ? '' : 'faq1'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">O que é a Área VIP e quais os benefícios?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq1' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq1'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>A Área VIP é um espaço exclusivo e gratuito para membros, criado para aprofundar sua experiência. Os benefícios incluem:</p>
+          <ul class="mt-3 space-y-2">
+            <li class="flex items-start"><span class="text-neon-violet-light mr-3 mt-1">◆</span><strong>Suporte direto</strong> para dúvidas sobre as postagens do blog.</li>
+            <li class="flex items-start"><span class="text-neon-violet-light mr-3 mt-1">◆</span>Oportunidade de <strong>publicar seus artigos científicos</strong> em nosso blog.</li>
+            <li class="flex items-start"><span class="text-neon-violet-light mr-3 mt-1">◆</span><strong>Orientação acadêmica gratuita</strong> para TCC e outros artigos.</li>
+            <li class="flex items-start"><span class="text-neon-violet-light mr-3 mt-1">◆</span>Acesso ao nosso <strong>fórum exclusivo</strong> para networking e discussões.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pergunta 2: Como me tornar membro? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq2' }">
+        <button @click="activeAccordion = activeAccordion === 'faq2' ? '' : 'faq2'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">Como posso me tornar membro? Há algum custo?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq2' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq2'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Tornar-se membro da nossa Área VIP é <strong class="text-neon-violet-light">totalmente gratuito!</strong> Basta realizar seu cadastro em nossa página dedicada à Área VIP. Após o cadastro, você terá acesso imediato a todos os benefícios.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 3: Que tipo de suporte para dúvidas eu posso esperar? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq3' }">
+        <button @click="activeAccordion = activeAccordion === 'faq3' ? '' : 'faq3'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">Que tipo de suporte para dúvidas eu posso esperar?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq3' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq3'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Na Área VIP, você terá um canal direto para tirar suas <strong class="text-neon-violet-light">dúvidas específicas sobre as postagens</strong>, além de esclarecer questões de disciplinas de contabilidade, garantindo que você realmente compreenda os temas.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 4: Posso sugerir temas para futuras postagens? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq4' }">
+        <button @click="activeAccordion = activeAccordion === 'faq4' ? '' : 'faq4'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">Posso sugerir temas para futuras postagens no blog?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq4' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq4'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Sim, absolutamente! Valorizamos muito a <strong class="text-neon-violet-light">participação dos nossos leitores</strong>. Suas sugestões nos ajudam a criar conteúdo relevante. Você pode usar nosso formulário de contato ou o canal de suporte exclusivo na Área VIP.</p>
+        </div>
+      </div>
+      
+      <!-- Pergunta 5: Como funciona a submissão de artigos? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq5' }">
+        <button @click="activeAccordion = activeAccordion === 'faq5' ? '' : 'faq5'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">Como funciona a submissão de artigos científicos?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq5' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq5'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Membros da Área VIP podem <strong class="text-neon-violet-light">submeter seus artigos científicos</strong> para avaliação e, se aprovados, publicação em nosso blog. É uma excelente forma de compartilhar seu conhecimento com uma audiência engajada.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 6: A orientação acadêmica é realmente gratuita? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq6' }">
+        <button @click="activeAccordion = activeAccordion === 'faq6' ? '' : 'faq6'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">A orientação acadêmica para TCC é gratuita?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq6' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq6'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Sim, a orientação acadêmica é um <strong class="text-neon-violet-light">benefício exclusivo e gratuito</strong> para os membros da Área VIP. Nosso objetivo é fornecer um apoio valioso para sua jornada acadêmica.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 7: O fórum é exclusivo para membros? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq7' }">
+        <button @click="activeAccordion = activeAccordion === 'faq7' ? '' : 'faq7'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">O fórum de discussões é exclusivo para membros?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq7' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq7'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Sim, nosso fórum é <strong class="text-neon-violet-light">exclusivamente para membros da Área VIP</strong>, garantindo um ambiente seguro e focado para trocas de conhecimento entre pessoas engajadas nos temas de contabilidade.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 8: O que é a Escola de Negócios? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq8' }">
+        <button @click="activeAccordion = activeAccordion === 'faq8' ? '' : 'faq8'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">O que é a Escola de Negócios ETC Brasil?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq8' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq8'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>A Escola de Negócios é um <strong class="text-neon-violet-light">projeto futuro</strong> que oferecerá educação de alta qualidade e prática na área contábil e de negócios, capacitando acadêmicos e profissionais para os desafios do mercado.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 9: Quais tipos de cursos a Escola irá oferecer? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq9' }">
+        <button @click="activeAccordion = activeAccordion === 'faq9' ? '' : 'faq9'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">Quais tipos de cursos a Escola de Negócios irá oferecer?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq9' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq9'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>A Escola oferecerá cursos em <strong class="text-neon-violet-light">formato de videoaulas</strong>, focados em temas relevantes e atuais da contabilidade e gestão, cobrindo desde conceitos fundamentais até tópicos avançados.</p>
+        </div>
+      </div>
+
+      <!-- Pergunta 10: Os cursos oferecerão certificação válida? -->
+      <div class="neon-card-violet neon-card transition-all duration-300" :class="{ 'shadow-neon-violet-strong': activeAccordion === 'faq10' }">
+        <button @click="activeAccordion = activeAccordion === 'faq10' ? '' : 'faq10'" class="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none">
+          <span class="text-lg font-medium text-white">Os cursos oferecerão certificação válida?</span>
+          <svg class="w-6 h-6 text-neon-violet-light transform transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180': activeAccordion === 'faq10' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="activeAccordion === 'faq10'" x-collapse class="px-5 sm:px-6 pb-5 text-gray-300">
+          <p>Sim! Ao concluir nossos cursos, você terá direito a uma <strong class="text-neon-violet-light">certificação mediante prova e aprovação</strong>, válida para apresentação como <strong class="text-neon-violet-light">horas complementares</strong> e para enriquecer seu currículo.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Fim da Seção de Perguntas Frequentes (FAQ) -->

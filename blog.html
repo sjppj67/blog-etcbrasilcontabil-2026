@@ -1,0 +1,349 @@
+---
+layout: default
+title: Blog
+pagination:
+  enabled: true
+  collection: posts
+  per_page: 6
+---
+
+<style>
+  /* Seus estilos permanecem os mesmos */
+  body {
+    font-family: "Lato", sans-serif;
+    background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%);
+    min-height: 100vh;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
+  }
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+  .text-glow:hover {
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.8),
+      0 0 30px rgba(0, 240, 255, 0.4);
+  }
+  .text-glow-strong {
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.7),
+      0 0 25px rgba(0, 240, 255, 0.5), 0 0 35px rgba(0, 240, 255, 0.3);
+  }
+  .neon-card {
+    background: linear-gradient(
+      135deg,
+      rgb(0, 0, 0) 0%,
+      rgb(0, 0, 0) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(84, 139, 143, 0.729);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+      border-color 0.3s ease;
+  }
+  .neon-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 1, 119, 0.7) 0%,
+      rgba(112, 8, 219, 0.3) 100%
+    );
+    border-radius: inherit;
+    z-index: 0;
+  }
+  .neon-card:hover::before {
+    opacity: 1;
+  }
+  .neon-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 240, 255, 0.3),
+      0 0 20px rgba(0, 240, 255, 0.5);
+    border-color: rgba(0, 240, 255, 0.6);
+  }
+  .btn-neon {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 240, 255, 0.1) 0%,
+      rgba(59, 130, 246, 0.1) 100%
+    );
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: #00f0ff;
+    transition: all 0.3s ease;
+  }
+  .btn-neon:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 240, 255, 0.2) 0%,
+      rgba(59, 130, 246, 0.2) 100%
+    );
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  /* Efeito de pontos para o Hero */
+  .bg-dot-grid {
+    background-size: 16px 16px;
+    background-image:radial-gradient(circle,rgba(0, 1, 119, 0.7)1px, transparent 1px);
+    background-color: #000000; /* Cor dark.800 do seu tema */
+  }
+
+
+  /* ========================================================================== */
+  /* NOVA CLASSE PARA O EFEITO NEON NAS CAIXAS DA SIDEBAR                       */
+  /* ========================================================================== */
+  .bg-dot-grid-neon {
+    /* Cor de fundo escura para a caixa */
+    background-color: #000000; /* Cor dark.800 do seu tema */
+    
+    /* Imagem de fundo com os pontos neon */
+    background-image: radial-gradient(circle, rgba(0, 1, 119, 0.7) 1px, transparent 1px); /* Pontos com a cor blue.400 e 30% de opacidade */
+    
+    /* Tamanho da grade de pontos */
+    background-size: 16px 16px;
+  }
+</style>
+
+<!-- Seção Breadcrumb -->
+<div class="bg-dot-grid backdrop-blur-sm border-b border-neon-blue/20">
+  <div class="container mx-auto px-4 py-3">
+    <nav class="text-sm">
+      <a
+        href="{{ '/' | relative_url }}"
+        class="text-gray-400 hover:text-neon-blue transition-colors"
+        >Home</a
+      >
+      <span class="mx-2 text-gray-500">>></span>
+      <span class="text-neon-blue text-glow">Blog</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Seção Hero -->
+<section class="bg-dot-grid text-white py-20 relative overflow-hidden">
+  <div class="container mx-auto px-4 text-center relative z-10">
+    <h1
+      class="text-5xl lg:text-6xl font-bold font-playfair mb-6 text-glow-strong"
+    >
+      Blog ETC Brasil Contabilidade
+    </h1>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+      Conteúdo especializado em
+      <span class="text-neon-blue text-glow-blue">contabilidade</span>,
+      <span class="text-neon-blue text-glow">empreendedorismo</span> e
+      <span class="text-neon-blue text-glow">gestão empresarial</span> para
+      impulsionar seu negócio.
+    </p>
+  </div>
+</section>
+
+<div class="container mx-auto px-4 py-16">
+  {% comment %}
+  ================================================================================
+  NOVA ESTRUTURA DE TÍTULOS (AJUSTE DE ALINHAMENTO) - Os títulos agora ficam em
+  sua própria linha, acima do grid principal. - Isso garante que o conteúdo das
+  colunas abaixo comece na mesma altura.
+  ================================================================================
+  {% endcomment %}
+  <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 mb-8">
+    <div class="lg:col-span-8">
+      <h2 class="text-3xl font-bold font-playfair text-white text-glow">
+        Último Artigo Postado
+      </h2>
+    </div>
+    <div class="lg:col-span-4">
+      <h2 class="text-3xl font-bold font-playfair text-white text-glow">
+        Fique por Dentro
+      </h2>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
+    <div class="lg:col-span-8">
+      <!-- Seção Artigo em Destaque (Apenas na Página 1) -->
+      {% if paginator.page == 1 and paginator.posts.size > 0 %}
+      <section class="mb-12">
+        {% assign item = paginator.posts.first %} {% include featured-card.html
+        %}
+      </section>
+      {% endif %}
+
+      <!-- Seção Grade de Artigos -->
+      <section>
+        <h2 class="text-3xl font-bold font-playfair text-glow-blue mb-8 text-glow">
+          Últimos Artigos
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          {% if paginator.page == 1 %} {% for item in paginator.posts offset:1
+          limit:5 %} {% include article-card.html %} {% endfor %} {% else %} {%
+          for item in paginator.posts %} {% include article-card.html %} {%
+          endfor %} {% endif %}
+        </div>
+      </section>
+
+      <!-- Seção Controles de Paginação -->
+      {% if paginator.total_pages > 1 %}
+      <section class="pt-12">{% include pagination.html %}</section>
+      {% endif %}
+    </div>
+
+    <aside class="lg:col-span-4">
+      <div class="sticky top-32 space-y-8">
+        {% comment %}
+        ============================================================================
+        MÓDULO 1: WIDGET DE PESQUISA
+        ============================================================================
+        {% endcomment %}
+        <!-- APLICAÇÃO DA NOVA CLASSE AQUI -->
+        <div class="bg-dot-grid-neon p-6 rounded-xl border border-neon-blue/20">
+          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">
+            Busca no Blog
+          </h3>
+          <form action="/busca" method="get" class="flex items-center">
+            <input
+              type="search"
+              name="q"
+              placeholder="O que você procura?"
+              class="bg-dark-950/70 border border-neon-blue/20 text-white text-sm rounded-l-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-neon-blue/50"
+            />
+            <button
+              type="submit"
+              class="bg-neon-blue text-dark-700 p-2.5 rounded-r-md hover:bg-opacity-80 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        {% comment %}
+        ============================================================================
+        MÓDULO 2: WIDGET DE CATEGORIAS (VERSÃO COM DESIGN DE PÍLULAS ) - Baseado
+        no modelo de design fornecido. - Usa ícones SVG para as pastas.
+        ============================================================================
+        {% endcomment %}
+        <!-- APLICAÇÃO DA NOVA CLASSE AQUI -->
+        <div class="bg-dot-grid-neon p-6 rounded-xl border border-neon-blue/20">
+          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">
+            Categorias
+          </h3>
+          <ul class="space-y-2">
+            {% for category in site.categories %}
+            <li>
+              <a
+                href="/blog/categorias/{{ category[0] | slugify }}/"
+                class="flex items-center justify-between w-full p-3 rounded-lg bg-gray-800/50 hover:bg-neon-blue/20 border border-gray-700 hover:border-neon-blue/50 transition-all duration-300 ease-in-out group"
+              >
+                <div class="flex items-center">
+                  <!-- Ícone de Pasta (SVG) -->
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-3 text-gray-400 group-hover:text-neon-blue transition-colors"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                    />
+                  </svg>
+                  <span
+                    class="text-gray-200 group-hover:text-white transition-colors"
+                  >
+                    {{ category[0] }}
+                  </span>
+                </div>
+
+                <span
+                  class="text-gray-400 font-semibold text-sm group-hover:text-neon-blue transition-colors"
+                >
+                  {{ category[1].size }}
+                </span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% comment %}
+        ============================================================================
+        MÓDULO 3: WIDGET DE CTA (ESCOLA DE NEGÓCIOS  )
+        ============================================================================
+        {% endcomment %}
+        <!-- APLICAÇÃO DA NOVA CLASSE AQUI -->
+        <div
+          class="bg-dot-grid-neon p-6 rounded-xl border border-neon-blue/20 text-center"
+        >
+          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-2">
+            Escola de Negócios
+          </h3>
+          <p class="text-gray-400 text-sm mb-4">
+            Eleve sua gestão a um novo patamar. Conheça nossos cursos e
+            mentorias.
+          </p>
+          <a
+            href="#"
+            class="btn-neon inline-block w-full py-2 px-4 rounded-lg text-center font-semibold"
+          >
+            Saiba Mais
+          </a>
+        </div>
+
+        {% comment %}
+        ============================================================================
+        MÓDULO 4: WIDGET DE POSTS MAIS LIDOs (PLACEHOLDER)
+        ============================================================================
+        {% endcomment %}
+        <!-- APLICAÇÃO DA NOVA CLASSE AQUI -->
+        <div class="bg-dot-grid-neon p-6 rounded-xl border border-neon-blue/20">
+          <h3 class="font-playfair text-xl text-neon-blue text-glow mb-4">
+            Posts Mais Lidos
+          </h3>
+          <p class="text-gray-400 text-sm">
+            Em breve: nossos artigos mais populares, com a força do Firebase!
+          </p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- Seção CTA Newsletter -->
+<section
+  class="bg-gradient-to-br from-dark-800 to-dark-900 text-white py-20 relative overflow-hidden"
+>
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2
+        class="text-4xl lg:text-5xl font-bold font-playfair mb-4 text-glow-strong"
+      >
+        Não Perca Nenhuma Novidade
+      </h2>
+      <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+        Receba semanalmente os melhores conteúdos sobre
+        <span class="text-neon-blue text-glow">contabilidade</span> e
+        <span class="text-neon-blue text-glow">gestão empresarial</span>.
+      </p>
+    </div>
+  </div>
+</section>

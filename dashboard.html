@@ -1,0 +1,121 @@
+---
+layout: default
+title: Sua Área VIP
+permalink: /dashboard/
+---
+
+<!-- 
+  Este componente Alpine.js (x-data) vai controlar toda a página.
+  Ele verifica se o usuário está logado. Se não estiver, redireciona para o login.
+  Se estiver, mostra o conteúdo do dashboard.
+-->
+<div x-data="dashboardController()" x-init="checkAuth" class="bg-gray-100 text-gray-800">
+
+  <!-- Tela de Carregamento -->
+  <template x-if="loading">
+    <div class="flex justify-center items-center min-h-screen">
+      <p class="text-xl">Carregando sua área...</p>
+    </div>
+  </template>
+
+  <!-- Conteúdo do Dashboard (só mostra se não estiver carregando e o usuário estiver logado) -->
+  <template x-if="!loading && user">
+    <div class="min-h-screen">
+      <!-- Cabeçalho do Dashboard -->
+      <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900">
+              Bem-vindo(a) à Área VIP!
+            </h1>
+            <p class="text-sm text-gray-600" x-text="'Logado como: ' + user.email"></p>
+          </div>
+          <button @click="handleLogout" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Sair
+          </button>
+        </div>
+      </header>
+
+      <!-- Corpo do Dashboard com os Cards -->
+      <main class="py-10">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div class="px-4 py-6 sm:px-0">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-6">Seus Benefícios:</h3>
+            
+            <!-- Grid de Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              
+              <!-- Card 1: Orientações para TCC -->
+              <div class="bg-white overflow-hidden shadow rounded-lg p-6">
+                <h4 class="font-bold text-lg mb-2">Orientações para TCC</h4>
+                <p class="text-sm text-gray-600 mb-4">Receba suporte especializado para desenvolver seu Trabalho de Conclusão de Curso.</p>
+                <a href="/enviar-duvida/" class="text-indigo-600 hover:text-indigo-800 font-semibold">Acessar</a>
+              </div>
+
+              <!-- Card 2: Fórum de Discussões -->
+              <div class="bg-white overflow-hidden shadow rounded-lg p-6">
+                <h4 class="font-bold text-lg mb-2">Fórum de Discussões</h4>
+                <p class="text-sm text-gray-600 mb-4">Participe de discussões estratégicas com profissionais e estudantes da área.</p>
+                <!-- ATENÇÃO: Coloque aqui o link real do seu fórum phpBB3 -->
+                <a href="https://SEU-FORUM.onrender.com" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold">Ir para o Fórum</a>
+              </div>
+
+              <!-- Card 3: Exercícios para Concursos -->
+              <div class="bg-white overflow-hidden shadow rounded-lg p-6">
+                <h4 class="font-bold text-lg mb-2">Exercícios para Concursos</h4>
+                <p class="text-sm text-gray-600 mb-4">Resolva exercícios práticos para concursos de diversas áreas da contabilidade.</p>
+                <a href="/exercicios/" class="text-indigo-600 hover:text-indigo-800 font-semibold">Ver Exercícios</a>
+              </div>
+
+              <!-- Card 4: Conteúdo Exclusivo -->
+              <div class="bg-white overflow-hidden shadow rounded-lg p-6">
+                <h4 class="font-bold text-lg mb-2">Conteúdo Exclusivo</h4>
+                <p class="text-sm text-gray-600 mb-4">Acesse apostilas, gabaritos e materiais exclusivos pensados para seu sucesso.</p>
+                <a href="/materiais/" class="text-indigo-600 hover:text-indigo-800 font-semibold">Baixar Materiais</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </template>
+
+</div>
+
+<script type="module">
+  import { auth } from '/_includes/firebase-init.html';
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
+  // Alpine.js component para o dashboard
+  document.addEventListener('alpine:init', ( ) => {
+    Alpine.data('dashboardController', () => ({
+      loading: true,
+      user: null,
+
+      checkAuth() {
+        onAuthStateChanged(auth, (firebaseUser) => {
+          if (firebaseUser) {
+            // Usuário está logado.
+            this.user = firebaseUser;
+          } else {
+            // Usuário não está logado, redireciona para a página de login.
+            window.location.replace('/login/');
+          }
+          this.loading = false;
+        });
+      },
+
+      handleLogout() {
+        signOut(auth).then(() => {
+          // Logout bem-sucedido, redireciona para a home ou login.
+          console.log('Logout com sucesso!');
+          window.location.href = '/';
+        }).catch((error) => {
+          console.error('Erro no logout:', error);
+          alert('Não foi possível sair. Tente novamente.');
+        });
+      }
+    }));
+  });
+</script>

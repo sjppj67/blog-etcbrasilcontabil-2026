@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+
+<head>
+  {% include head.html %}
+  <link rel="stylesheet" href="/assets/css/tailwind.css" />
+  <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css" />
+</head>
+
+<body class="bg-dark-950 text-gray-300 font-lato min-h-screen flex flex-col antialiased">
+
+  {% include header.html %}
+  <main class="flex-grow">{{ content }}</main>
+  {% include footer.html %}
+
+  <!-- =============================================== -->
+  <!-- ÁREA DE SCRIPTS (VERSÃO FINAL E CENTRALIZADA) -->
+  <!-- =============================================== -->
+
+  <!-- 1. Scripts Essenciais de Includes (se houver) -->
+  {% include firebase-init.html %}
+
+  <!-- 2. Bibliotecas Externas (Vendors) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag( ){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXX');
+  </script>
+
+  <!-- 3. Seus Scripts Personalizados (SEMPRE POR ÚLTIMO) -->
+  <script src="/assets/js/nossos_scripts.js"></script>
+
+</body>
+</html>

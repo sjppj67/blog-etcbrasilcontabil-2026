@@ -1,0 +1,23 @@
+# Arquivos gerados pelo Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Arquivos gerados pelo Sass
+.sass-cache/
+
+# Arquivos de dependências do Node.js (MUITO IMPORTANTE)
+node_modules/
+
+# Arquivos de log do npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de configuração do editor
+.vscode/
+.idea/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db

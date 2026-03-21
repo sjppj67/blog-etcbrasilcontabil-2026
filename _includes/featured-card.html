@@ -1,0 +1,58 @@
+<div class="neon-card rounded-3xl p-8 transition-all duration-500">
+  <div class="grid lg:grid-cols-2 gap-8 items-center">
+    <div class="relative group overflow-hidden">
+      <a href="{{ item.url | relative_url }}">
+        <div class="card-image-hover h-100">
+          {% if item.image.path %}
+            <!-- SISTEMA NOVO: Imagem em destaque maior -->
+            {% include responsive-image.html 
+               path=item.image.path 
+               alt=item.image.alt 
+               class="w-full h-full rounded-3xl object-cover" %}
+          {% else %}
+            <!-- RETROCOMPATIBILIDADE -->
+            <picture>
+              <source srcset="{{ item.image.avif | relative_url }}" type="image/avif" />
+              <source srcset="{{ item.image.webp | relative_url }}" type="image/webp" />
+              <img src="{{ item.image.jpg | relative_url }}" alt="{{ item.image.alt }}" class="w-full h-full rounded-3xl object-cover" />
+            </picture>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+
+    <div class="relative z-10">
+      <div class="flex items-center mb-4">
+        <span class="bg-neon-blue/20 text-neon-blue px-4 py-2 rounded-full text-sm font-medium mr-3 border border-neon-blue/40 text-glow">
+          {{ item.categories.first }}
+        </span>
+        <span class="text-gray-400 text-sm">
+          {{ item.date | date: "%d de %B de %Y" }}
+        </span>
+      </div>
+
+      <h3 class="text-3xl font-bold font-playfair text-white mb-4 text-glow transition-all duration-300">
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      </h3>
+
+      <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+        {{ item.excerpt | strip_html | truncate: 200 }}
+      </p>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <div class="bg-gradient-to-br from-neon-blue/30 to-blue-600/30 rounded-full w-12 h-12 flex items-center justify-center mr-3 border border-neon-blue/40">
+            <img src="/assets/img/minha-foto/professor-sidney-jones.svg" alt="Foto do Professor Sidney Jones" class="w-10 h-10 rounded-full object-cover" />
+          </div>
+          <div>
+            <p class="font-medium text-white">{% if item.author %}{{ item.author }}{% else %}Professor Sidney Jones{% endif %}</p>
+            <p class="text-sm text-gray-400">Contador Sênior</p>
+          </div>
+        </div>
+        <a href="{{ item.url | relative_url }}" class="btn-neon px-8 py-3 rounded-lg font-medium relative z-10">
+          Ler Artigo
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

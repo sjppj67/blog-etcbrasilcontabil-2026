@@ -1,0 +1,87 @@
+<!-- [INÍCIO DO MEGA-MENU - VERSÃO 3.3 - REFORÇO NEON APLICADO] -->
+<div
+  x-show="openMegaMenu"
+  @click.away="openMegaMenu = false"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0 -translate-y-2"
+  x-transition:enter-end="opacity-100 translate-y-0"
+  x-transition:leave="transition ease-in duration-200"
+  x-transition:leave-start="opacity-100 translate-y-0"
+  x-transition:leave-end="opacity-0 -translate-y-2"
+  class="absolute inset-x-0 top-full bg-dark-950 bg-dot-grid py-8 z-40 border-t border-blue-500/30"
+  style="display: none;"
+>
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      
+      <!-- PASSO 1: Imprime a PRIMEIRA categoria -->
+      {% assign primeira_categoria = site.data.categories[0] %}
+      <!-- ATUALIZADO: Usando a nova classe de reforço .hover-blue -->
+      <div class="neon-card hover-blue h-full flex flex-col p-6 group">
+        <h3 class="text-glow-blue font-playfair text-sm font-bold mb-4 pb-3 border-b border-blue-500/30 group-hover:border-blue-400/60 transition-colors duration-300 text-left">
+          {{ primeira_categoria.name | upcase }}
+        </h3>
+        <ul class="space-y-2 text-left">
+          {% assign subcategorias_filtradas_passo1 = site.data.subcategories | where: "parent_category", primeira_categoria.name %}
+          {% for subitem in subcategorias_filtradas_passo1 %}
+          <li>
+            <a href="{{ site.baseurl }}{{ subitem.link }}" class="flex items-start text-gray-300 font-lato text-sm hover:text-blue-400 transition-colors duration-300 group/item">
+              <span class="inline-block w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 mr-3 group-hover/item:animate-pulse group-hover/item:shadow-neon-blue flex-shrink-0"></span>
+              <span class="flex-1 group-hover/item:translate-x-1 transition-transform duration-300">{{ subitem.name }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- PASSO 2: Imprime o CTA Estático -->
+      <!-- ATUALIZADO: Usando a nova classe de reforço .hover-violet -->
+      <div class="neon-card hover-violet h-full flex flex-col p-6 group">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="text-glow-violet font-playfair text-xl font-bold">
+              🎓 Escola de Negócios
+            </h3>
+            <div class="w-8 h-8 bg-violet-500/30 rounded-full flex items-center justify-center pulse-glow">
+                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            </div>
+        </div>
+        <p class="text-gray-400 text-sm mb-6 leading-relaxed text-center">
+          Cadastre-se para receber o e-book completo com grade curricular e valores.
+        </p>
+        <form class="space-y-4 mt-auto">
+          <input type="email" placeholder="Digite seu e-mail" class="w-full px-4 py-3 bg-dark-900/70 border border-violet-500/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 text-white placeholder-gray-400 transition-all duration-300 text-sm" required />
+          <button type="submit" class="btn-neon-secondary w-full">
+            Quero meu e-book
+          </button>
+        </form>
+        <div class="mt-4 pt-4 border-t border-violet-500/20">
+          <p class="text-xs text-gray-400 text-center">
+            ✨ Conteúdo exclusivo e atualizado
+          </p>
+        </div>
+      </div>
+
+      <!-- PASSO 3: Imprime o RESTANTE das categorias -->
+      {% for categoria_principal in site.data.categories offset:1 %}
+      <!-- ATUALIZADO: Usando a nova classe de reforço .hover-blue -->
+      <div class="neon-card hover-blue h-full flex flex-col p-6 group">
+        <h3 class="text-glow-blue font-playfair text-sm font-bold mb-4 pb-3 border-b border-blue-500/30 group-hover:border-blue-400/60 transition-colors duration-300 text-left">
+          {{ categoria_principal.name | upcase }}
+        </h3>
+        <ul class="space-y-2 text-left">
+          {% assign subcategorias_filtradas_passo3 = site.data.subcategories | where: "parent_category", categoria_principal.name %}
+          {% for subitem in subcategorias_filtradas_passo3 %}
+          <li>
+            <a href="{{ site.baseurl }}{{ subitem.link }}" class="flex items-start text-gray-300 font-lato text-sm hover:text-blue-400 transition-colors duration-300 group/item">
+              <span class="inline-block w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 mr-3 group-hover/item:animate-pulse group-hover/item:shadow-neon-blue flex-shrink-0"></span>
+              <span class="flex-1 group-hover/item:translate-x-1 transition-transform duration-300">{{ subitem.name }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- [FIM DO MEGA-MENU] -->

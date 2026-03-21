@@ -1,0 +1,32 @@
+{
+  "name": "blog-jekyll-tailwind",
+  "version": "1.0.0",
+  "description": "Estrutura base para projetos Jekyll com Tailwind CSS",
+  "main": "index.js",
+  "scripts": {
+    "jekyll:serve": "bundle exec jekyll serve --livereload",
+    "tailwind:local": "npx tailwindcss -i ./_src/css/master.css -o ./assets/css/tailwind.css --minify --watch",
+    "tailwind:site": "npx tailwindcss -i ./_src/css/master.css -o ./_site/assets/css/tailwind.css --minify --watch",
+    "dev": "concurrently \"npm run jekyll:serve\" \"npm run tailwind:local\" \"npm run tailwind:site\"",
+    "start": "npm run dev",
+    "build:css": "npm run tailwind:local && npm run tailwind:site",
+    "build:jekyll": "bundle exec jekyll build",
+    "build": "npm run build:css && npm run build:jekyll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/forms": "0.5.10",
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "10.4.19",
+    "concurrently": "8.2.2",
+    "npm-run-all": "4.1.5",
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.1",
+    "tailwindcss-animate": "1.0.7"
+  },
+  "dependencies": {
+    "swiper": "11.2.10"
+  }
+}

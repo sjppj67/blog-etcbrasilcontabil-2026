@@ -1,0 +1,48 @@
+<nav class="flex items-center justify-center space-x-2">
+  <!-- Botão Anterior -->
+  {% if paginator.page > 1 %}
+  <a
+    href="{{ paginator.previous_page_path | relative_url }}"
+    class="px-4 py-2 text-gray-400 hover:text-neon-blue hover:bg-dark-700/50 rounded-lg transition-all duration-300 border border-transparent hover:border-neon-blue/40"
+  >
+    ← Anterior
+  </a>
+  {% else %}
+  <span class="px-4 py-2 text-gray-600 cursor-not-allowed">← Anterior</span>
+  {% endif %}
+
+  <!-- Números de Página -->
+  {% for page in (1..paginator.total_pages) %} {% if page == paginator.page %}
+  <span
+    class="px-4 py-2 bg-neon-blue/20 text-neon-blue border border-neon-blue/60 rounded-lg text-glow"
+  >
+    {{ page }}
+  </span>
+  {% elsif page == 1 %}
+  <a
+    href="{{ '/blog/' | relative_url }}"
+    class="px-4 py-2 text-gray-400 hover:text-neon-blue hover:bg-dark-700/50 rounded-lg transition-all duration-300 border border-transparent hover:border-neon-blue/40"
+  >
+    {{ page }}
+  </a>
+  {% else %}
+  <a
+    href="{{ '/blog/page/' | append: page | append: '/' | relative_url }}"
+    class="px-4 py-2 text-gray-400 hover:text-neon-blue hover:bg-dark-700/50 rounded-lg transition-all duration-300 border border-transparent hover:border-neon-blue/40"
+  >
+    {{ page }}
+  </a>
+  {% endif %} {% endfor %}
+
+  <!-- Botão Próximo -->
+  {% if paginator.page < paginator.total_pages %}
+  <a
+    href="{{ paginator.next_page_path | relative_url }}"
+    class="px-4 py-2 text-gray-400 hover:text-neon-blue hover:bg-dark-700/50 rounded-lg transition-all duration-300 border border-transparent hover:border-neon-blue/40"
+  >
+    Próximo →
+  </a>
+  {% else %}
+  <span class="px-4 py-2 text-gray-600 cursor-not-allowed">Próximo →</span>
+  {% endif %}
+</nav>

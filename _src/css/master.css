@@ -1,0 +1,136 @@
+/*
+================================================================================
+ARQUIVO FONTE PRINCIPAL - MASTER.CSS (VERSÃO 10.0 - NEON SUTIL)
+================================================================================
+*/
+
+/* 1. FONTES */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" );
+
+/* 2. DIRETIVAS TAILWIND */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3. ESTILOS GLOBAIS (BASE) */
+@layer base {
+  body {
+    @apply font-lato text-gray-300;
+    background: linear-gradient(135deg, #000000 0%, #0A0A0A 50%, #000000 100%);
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+  /* Transição suave para todos os links */
+  a {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+/* 4. NOSSOS COMPONENTES PERSONALIZADOS */
+@layer components {
+
+  /* =============================================== */
+  /* ===== TEXTO COM BRILHO NEON SUTIL         ===== */
+  /* =============================================== */
+  .text-glow-blue {
+    @apply text-white;
+    text-shadow: 
+      0 0 5px rgba(0, 240, 255, 0.7),
+      0 0 15px rgba(0, 240, 255, 0.4),
+      0 0 25px rgba(0, 240, 255, 0.2);
+  }
+
+  .text-glow-violet {
+    @apply text-white;
+    text-shadow: 
+      0 0 5px rgba(12, 235, 146, 0.75),
+      0 0 15px rgb(167, 34, 74),
+      0 0 25px rgb(47, 7, 165);
+  }
+
+  /* HOVER SUTIL PARA TEXTOS E LINKS */
+  .text-glow-hover:hover {
+    text-shadow: 
+      0 0 8px rgba(220, 200, 255, 0.9),
+      0 0 18px rgba(160, 32, 240, 0.7),
+      0 0 30px rgba(160, 32, 240, 0.5);
+  }
+
+/* =============================================== */
+/* ===== CARDS NEON SUTIS (COM HOVER CORRIGIDO E CALIBRADO) ===== */
+/* =============================================== */
+.neon-card {
+  @apply relative overflow-hidden rounded-2xl border transition-all duration-300;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* --- Card Azul --- */
+.neon-card-blue {
+  @apply border-neon-blue/30; /* Borda sutil no estado padrão */
+}
+.neon-card-blue:hover {
+  @apply transform -translate-y-2 scale-[1.02]; /* Animação de movimento */
+  @apply border-neon-blue/60; /* Borda fica um pouco mais forte */
+  @apply shadow-neon-blue; /* <<< APLICA O BRILHO SUTIL NO HOVER! */
+}
+
+/* --- Card Violeta --- */
+.neon-card-violet {
+  @apply border-neon-violet/30; /* Borda sutil no estado padrão */
+}
+.neon-card-violet:hover {
+  @apply transform -translate-y-2 scale-[1.02]; /* Animação de movimento */
+  @apply border-neon-violet/60; /* Borda fica um pouco mais forte */
+  @apply shadow-neon-violet; /* <<< APLICA O BRILHO SUTIL NO HOVER! */
+}
+
+
+  /* =============================================== */
+  /* ===== BOTÕES NEON SUTIS                   ===== */
+  /* =============================================== */
+  .btn-neon {
+    @apply relative overflow-hidden rounded-xl border px-8 py-3 font-bold transition-all duration-300;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  }
+  
+
+  /* Botão Primário (Azul) */
+  .btn-neon-primary {
+    @apply btn-neon border-neon-blue/50 text-neon-blue;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 216, 230, 0.1) 100%);
+  }
+  .btn-neon-primary:hover {
+    @apply border-neon-blue/80 text-white shadow-neon-blue;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 216, 230, 0.2) 100%);
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+  }
+
+  /* Botão Secundário (Violeta) */
+  .btn-neon-secondary {
+    @apply btn-neon border-neon-violet/50 text-neon-violet-light;
+    background: linear-gradient(135deg, rgba(112, 8, 219, 0.1) 0%, rgba(167, 83, 219, 0.1) 100%);
+  }
+  .btn-neon-secondary:hover {
+    @apply border-neon-violet/80 text-white shadow-neon-violet;
+    background: linear-gradient(135deg, rgba(112, 8, 219, 0.2) 0%, rgba(167, 83, 219, 0.2) 100%);
+    text-shadow: 0 0 10px rgba(167, 83, 219, 0.7);
+  }
+
+  /* =============================================== */
+  /* ===== INPUTS E ANIMAÇÕES (Mantidos)       ===== */
+  /* =============================================== */
+  .input-neon {
+    @apply rounded-lg border border-neon-blue/30 bg-black/80 text-white transition-all duration-300;
+  }
+  .input-neon:focus {
+    @apply border-neon-blue/70 shadow-neon-blue outline-none;
+  }
+  
+  /* Animações (mantidas como estavam, pois são boas) */
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+  @keyframes pulseGlow { 0% { box-shadow: 0 0 8px rgba(0, 240, 255, 0.2); } 100% { box-shadow: 0 0 20px rgba(112, 8, 219, 0.5); } }
+  .pulse-glow { animation: pulseGlow 2s ease-in-out infinite alternate; }
+}

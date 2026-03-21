@@ -1,0 +1,17 @@
+# _data/navigation.yml (VERSÃO PARA PERMALINKS 'PRETTY')
+
+- name: Home
+  link: /
+
+- name: Sobre
+  link: /sobre/
+
+- name: Blog
+  link: /blog/
+  submenu: true
+
+- name: Depoimentos
+  link: /depoimentos/
+
+- name: Contato
+  link: /contato/

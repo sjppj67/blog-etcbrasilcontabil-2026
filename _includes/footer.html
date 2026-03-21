@@ -1,0 +1,99 @@
+<footer class="bg-dark-900 text-gray-400 py-12 mt-16 border-t border-neon-blue/20 relative">
+  <div class="sparkle-effect"></div>
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- Coluna 1: Sobre -->
+      <div>
+        <h3 class="text-glow-blue font-playfair text-lg font-bold mb-4">
+          ETC Brasil Contabilidade
+        </h3>
+        <p class="text-sm">
+          Blog especializado em contabilidade societária, IFRS, legislação tributária e atualidades do mercado contábil.
+        </p>
+      </div>
+
+      <!-- Coluna 2: Links Rápidos -->
+      <div>
+        <h3 class="text-glow-blue font-playfair text-lg font-bold mb-4">
+          Navegação
+        </h3>
+        <ul class="space-y-2 text-sm">
+          {% for item in site.data.navigation %}
+          <li>
+            <a href="{{ item.link | relative_url }}" class="hover:text-neon-blue transition-colors">{{ item.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Categorias -->
+      <div>
+        <h3 class="text-glow-blue font-playfair text-lg font-bold mb-4">
+          Principais Categorias
+        </h3>
+        <ul class="space-y-2 text-sm">
+          {% for category in site.data.categories limit:5 %}
+          <li>
+            <a href="#" class="hover:text-neon-blue transition-colors">{{ category.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Coluna 4: Newsletter e Contato -->
+      <div>
+        <h3 class="text-glow-blue font-playfair text-lg font-bold mb-4">
+          Fique por Dentro
+        </h3>
+        <!-- Newsletter -->
+        <div class="mb-6">
+          <p class="text-sm mb-3">Receba as novidades diretamente no seu e-mail.</p>
+          <form class="flex">
+            <input
+              type="email"
+              placeholder="Seu melhor e-mail"
+              class="px-4 input-neon text-sm w-full rounded-r-none"
+            />
+            <button
+              type="submit"
+              class="btn-neon-primary rounded-l-none px-4"
+              aria-label="Inscrever-se na newsletter"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+        
+        <!-- Contato Rápido -->
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center">
+            <svg class="w-4 h-4 mr-3 text-neon-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>contato@etcbrasilcontabil.com.br</span>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-4 h-4 mr-3 text-neon-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            <span>(21) 9 9248-3471</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Seção de Copyright e Links de Política -->
+    <div class="border-t border-neon-blue/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+      <!-- LINHA CORRIGIDA ABAIXO -->
+      <p class="mb-4 md:mb-0">&copy; {{ site.time | date: '%Y' }} ETC Brasil Contabilidade e Treinamentos. Todos os direitos reservados.</p>
+      <div class="flex flex-wrap justify-center items-center space-x-2">
+        <a href="/politica-privacidade" class="hover:text-neon-blue transition-colors px-2">Política de Privacidade</a>
+        <span>|</span>
+        <a href="/termos-uso" class="hover:text-neon-blue transition-colors px-2">Termos de Uso</a>
+        <span>|</span>
+        <a href="/politica-cookies" class="hover:text-neon-blue transition-colors px-2">Política de Cookies</a>
+        <span>|</span>
+        <a href="/contato" class="hover:text-neon-blue transition-colors px-2">Contato</a>
+      </div>
+    </div>
+  </div>
+</footer>

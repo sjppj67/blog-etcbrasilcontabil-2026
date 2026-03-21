@@ -1,0 +1,9 @@
+{% assign img_path = include.path | relative_url %}
+<picture>
+  <source srcset="{{ img_path }}.avif" type="image/avif">
+  <source srcset="{{ img_path }}.webp" type="image/webp">
+  <img src="{{ img_path }}.jpg" 
+       alt="{{ include.alt }}" 
+       class="{{ include.class }}" 
+       loading="lazy">
+</picture>
