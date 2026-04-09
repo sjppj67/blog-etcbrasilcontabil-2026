@@ -389,14 +389,20 @@ permalink: /
             </a>
           </div>
 
-          <div class="flex items-center mb-3">
-            <span class="bg-neon-violet/20 text-neon-violet-light px-3 py-1 rounded-full text-sm font-medium border border-neon-violet/40">
-              {{ post.categories.first }}
-            </span>
-            <span class="text-gray-500 text-sm ml-auto">
-              {{ post.date | date: "%d/%m/%Y" }}
-            </span>
-          </div>
+          <div class="flex items-start mb-3">
+  <span class="bg-neon-violet/20 text-neon-violet-light px-3 py-1 rounded-full text-sm font-medium border border-neon-violet/40">
+    {{ post.categories.first }}
+  </span>
+  
+  <div class="text-right ml-auto leading-tight">
+    <span class="block text-[10px] uppercase tracking-wider text-gray-500 font-semibold">
+      Última Atualização
+    </span>
+    <span class="text-gray-400 text-sm font-medium">
+      {{ post.last_modified_at | default: post.date | date: "%d/%m/%Y" }}
+    </span>
+  </div>
+</div>
 
           <h3 class="text-xl font-semibold font-playfair text-white mb-3 hover:text-glow-blue transition-all duration-300">
             <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
@@ -423,19 +429,7 @@ permalink: /
       </div>
     </div>
   </section>
-<!-- Botão "Seguir no LinkedIn" com o estilo neon do seu site -->
-<a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=professorsidneyjones" 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   class="btn-neon-primary inline-flex items-center justify-center px-8 py-3">
-   
-    <!-- Ícone do LinkedIn -->
-    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-    </svg>
-    
-    <span>Seguir no LinkedIn</span>
-</a>
+
   <!-- Seção - "Seu Suporte Contábil Completo e Gratuito: Junte-se à Área VIP!" -->
   <section class="w-full flex flex-col justify-center items-center bg-neon-blue/10 py-16 px-4 relative">
     <div class="sparkle-effect"></div>
