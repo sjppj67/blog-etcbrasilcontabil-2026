@@ -7,10 +7,7 @@
   <meta id="decap-cms-config" />
 </head>
 <body>
-  <!-- 1. Adicionamos o 'onload' para chamar nossa função de inicialização -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" onload="initDecapCMS( )"></script>
-  
-  <!-- 2. Envolvemos nosso código de configuração dentro dessa função -->
+ <!-- 1. PRIMEIRO, definimos a nossa função de inicialização. -->
   <script>
     function initDecapCMS() {
       var config = {
@@ -35,7 +32,7 @@
               { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss Z", time_format: "HH:mm:ss" },
               { label: "Data da Última Modificação", name: "last_modified_at", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss Z", time_format: "HH:mm:ss" },
               { label: "Slug (URL amigável)", name: "slug", widget: "string", hint: "Exemplo: guia-cpc00-atualizado-2026-cpc51. Apenas letras minúsculas, números e hifens." },
-              { label: "Resumo (Excerpt)", name: "text" },
+              { label: "Resumo (Excerpt)", name: "excerpt", widget: "text" },
               {
                 label: "Imagem Principal",
                 name: "image",
@@ -60,5 +57,8 @@
       DecapCMS.init({ configElement });
     }
   </script>
+
+  <!-- 2. DEPOIS, carregamos o script do Decap e pedimos para ele chamar a função que já existe. -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" onload="initDecapCMS( )"></script>
 </body>
 </html>
