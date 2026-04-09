@@ -9,6 +9,21 @@
 
 <body class="bg-dark-950 text-gray-300 font-lato min-h-screen flex flex-col antialiased">
 
+  <!-- INÍCIO DO CÓDIGO DA BALEIA AZUL -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity ) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+  <!-- FIM DO CÓDIGO DA BALEIA AZUL -->
+  
   {% include header.html %}
   
   <main class="flex-grow">
@@ -25,20 +40,7 @@
   <!-- Inicializa o Firebase primeiro, pois outros scripts dependem dele. -->
   {% include firebase-init.html %}
 
-  <!-- Script de Autenticação do Netlify Identity -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
-
-  <!-- Google Analytics -->
+    <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
