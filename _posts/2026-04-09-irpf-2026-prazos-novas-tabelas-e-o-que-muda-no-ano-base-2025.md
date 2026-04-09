@@ -3,8 +3,8 @@ layout: post
 published: true
 title: "IRPF 2026: Prazos, Novas Tabelas e o que Muda no Ano-Base 2025"
 author: Professor Sidney Jones
-date: 2026-04-09 12:01:00 -03:00
-last_modified_at: 2026-04-09 12:09:00 -03:00
+last_modified_at: 2026-04-09 14:30:00 -0300
+date: 2026-04-01 12:01:00 -0300
 slug: guia-irpf-2026-regras-prazos-tabelas
 excerpt: Confira as principais diretrizes para a declaração do IRPF 2026.
   Entenda o cronograma oficial da Receita Federal, as novas faixas de isenção e

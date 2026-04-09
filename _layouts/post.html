@@ -57,9 +57,18 @@ layout: default
               </div>
               
               <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
-                <time datetime="{{ page.date | date_to_xmlschema }}">
-                  {{ page.date | date: "%d de %B de %Y" }}
-                </time>
+                <!-- Mostra a data mais recente (última atualização ou publicação) -->
+                {% if page.last_modified_at %}
+                  {% assign modified_date = page.last_modified_at | date: "%d de %B de %Y" %}
+                  <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">
+                    {{ modified_date }}
+                  </time>
+                  <span class="text-amber-400 text-xs">(atualizado)</span>
+                {% else %}
+                  <time datetime="{{ page.date | date_to_xmlschema }}">
+                    {{ page.date | date: "%d de %B de %Y" }}
+                  </time>
+                {% endif %}
 
                 <!-- Container do Contador de Visualizações -->
                 <div class="view-count-container hidden items-center gap-1">
@@ -73,7 +82,7 @@ layout: default
                 </div>
               </div>
 
-              <!-- Data de Última Atualização (só aparece se existir e for diferente da publicação) -->
+              <!-- Data de Última Atualização (detalhe extra dentro do post) -->
               {% if page.last_modified_at %}
                 {% assign modified_date = page.last_modified_at | date: "%d de %B de %Y" %}
                 {% assign publish_date = page.date | date: "%d de %B de %Y" %}
