@@ -1,0 +1,52 @@
+# Backend para se conectar ao Git Gateway do Netlify
+backend:
+  name: git-gateway
+  branch: main # IMPORTANTE: Verifique se 'main' é a sua branch principal. Se for 'master', troque aqui.
+
+# Onde salvar as imagens que você fizer upload pelo console
+media_folder: "assets/img/uploads" # Pasta para novas imagens
+public_folder: "/assets/img/uploads" # Caminho público para exibir as imagens
+
+# Define a estrutura dos seus "posts" (artigos)
+collections:
+  - name: "posts"
+    label: "Artigos do Blog"
+    folder: "_posts" # A pasta onde o Jekyll guarda os artigos
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Formato do nome do arquivo
+    
+    # Os campos do seu formulário (o front matter)
+    fields:
+      # --- Campos de Configuração (geralmente ocultos) ---
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Publicado", name: "published", widget: "hidden", default: true }
+
+      # --- Campos Principais do Artigo ---
+      - { label: "Título Principal", name: "title", widget: "string" }
+      - { label: "Autor", name: "author", widget: "string", default: "Professor Sidney Jones" }
+      - { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss Z", time_format: "HH:mm:ss" }
+      - { label: "Data da Última Modificação", name: "last_modified_at", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss Z", time_format: "HH:mm:ss" }
+      - { label: "Slug (URL amigável)", name: "slug", widget: "string", hint: "Exemplo: guia-cpc00-atualizado-2026-cpc51. Apenas letras minúsculas, números e hifens." }
+      - { label: "Resumo (Excerpt)", name: "excerpt", widget: "text" }
+
+      # --- Objeto de Imagem (campos aninhados) ---
+      - label: "Imagem Principal"
+        name: "image"
+        widget: "object"
+        fields:
+          - { label: "Caminho da Imagem", name: "path", widget: "image", hint: "Faça o upload de uma nova imagem ou selecione uma da galeria." }
+          - { label: "Texto Alternativo (alt)", name: "alt", widget: "string", hint: "Descrição curta da imagem para acessibilidade e SEO." }
+          - { label: "Descrição da Imagem", name: "description", widget: "string", hint: "Descrição mais longa que pode aparecer como legenda." }
+
+      # --- Listas de Categorias e Tags ---
+      - label: "Categorias"
+        name: "categories"
+        widget: "list"
+        hint: "Pressione Enter para adicionar uma nova categoria."
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        hint: "Pressione Enter para adicionar uma nova tag."
+
+      # --- Corpo do Artigo ---
+      - { label: "Corpo do Artigo (Markdown)", name: "body", widget: "markdown" }

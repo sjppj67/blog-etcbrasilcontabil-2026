@@ -15,3 +15,6 @@
 
 - name: Contato
   link: /contato/
+
+- name: Console  
+  link: /admin/
