@@ -4,10 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Console de Conteúdo</title>
-  <!-- O SCRIPT FOI REMOVIDO DAQUI -->
+  
+  <!-- Adicionamos um ID ao head para o script poder se anexar -->
+  <meta id="decap-cms-config" />
+
 </head>
 <body>
-  <!-- E COLOCADO AQUI, NO FINAL DO BODY -->
+  <!-- Carregamos o script principal do Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <!-- Injetamos a configuração diretamente via JavaScript -->
+  <script>
+    // Pega o conteúdo do seu config.yml e o transforma em um objeto JS
+    var config = {
+      backend: {
+        name: "git-gateway",
+        branch: "main"
+      },
+      media_folder: "assets/img/uploads",
+      public_folder: "/assets/img/uploads",
+      collections: [
+        {
+          name: "posts",
+          label: "Artigos do Blog",
+          folder: "_posts",
+          create: true,
+          slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+          fields: [
+            { label: "Layout", name: "layout", widget: "hidden", default: "post" },
+            { label: "Publicado", name: "published", widget: "hidden", default: true },
+            { label: "Título Principal", name: "title", widget: "string" },
+            { label: "Autor", name: "author", widget: "string", default: "Professor Sidney Jones" },
+            { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss Z", time_format: "HH:mm:ss" },
+            { label: "Data da Última Modificação", name: "last_modified_at", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss Z", time_format: "HH:mm:ss" },
+            { label: "Slug (URL amigável )", name: "slug", widget: "string", hint: "Exemplo: guia-cpc00-atualizado-2026-cpc51. Apenas letras minúsculas, números e hifens." },
+            { label: "Resumo (Excerpt)", name: "excerpt", widget: "text" },
+            {
+              label: "Imagem Principal",
+              name: "image",
+              widget: "object",
+              fields: [
+                { label: "Caminho da Imagem", name: "path", widget: "image", hint: "Faça o upload de uma nova imagem ou selecione uma da galeria." },
+                { label: "Texto Alternativo (alt)", name: "alt", widget: "string", hint: "Descrição curta da imagem para acessibilidade e SEO." },
+                { label: "Descrição da Imagem", name: "description", widget: "string", hint: "Descrição mais longa que pode aparecer como legenda." }
+              ]
+            },
+            { label: "Categorias", name: "categories", widget: "list", hint: "Pressione Enter para adicionar uma nova categoria." },
+            { label: "Tags", name: "tags", widget: "list", hint: "Pressione Enter para adicionar uma nova tag." },
+            { label: "Corpo do Artigo (Markdown)", name: "body", widget: "markdown" }
+          ]
+        }
+      ]
+    };
+
+    // Diz ao Decap para usar esta configuração JS em vez de procurar o config.yml
+    var configElement = document.getElementById('decap-cms-config');
+    configElement.setAttribute('type', 'text/yaml');
+    configElement.textContent = DecapCMS.YAML.stringify(config);
+    DecapCMS.init({ configElement });
+  </script>
 </body>
 </html>
