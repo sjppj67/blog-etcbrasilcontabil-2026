@@ -36,28 +36,15 @@
               { label: "Data de Publicação", name: "date", widget: "datetime" },
               { label: "Slug", name: "slug", widget: "string" },
               { label: "Resumo", name: "excerpt", widget: "text" },
-              
-              // ...
-{
-  label: "Imagem Principal",
-  name: "image",
-  widget: "object",
-  fields: [
-    // Trocamos 'image' por 'string' e ajustamos a dica
-    { 
-      label: "Nome Base da Imagem (sem extensão)", 
-      name: "path", 
-      widget: "string", 
-      hint: "Apenas o nome do arquivo, sem a extensão. Ex: cpc00-estrutura-conceitual. Você deve fazer o upload das versões .avif, .webp e .jpg manualmente na pasta de imagens." 
-    },
-    { label: "Texto Alternativo (alt)", name: "alt", widget: "string", hint: "Descrição curta da imagem para acessibilidade e SEO." },
-    { label: "Descrição da Imagem", name: "description", widget: "string", hint: "Descrição mais longa que pode aparecer como legenda." }
-  ]
-},
-// ...
-             
-      
-              
+              {
+                label: "Imagem Principal",
+                name: "image",
+                widget: "object",
+                fields: [
+                  { label: "Caminho", name: "path", widget: "image" },
+                  { label: "Alt", name: "alt", widget: "string" }
+                ]
+              },
               { label: "Categorias", name: "categories", widget: "list" },
               { label: "Tags", name: "tags", widget: "list" },
               { label: "Conteúdo", name: "body", widget: "markdown" }
